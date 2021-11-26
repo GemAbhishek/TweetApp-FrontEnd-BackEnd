@@ -1,0 +1,17 @@
+<div class="img-thumbnail" style="background-color:whitesmoke;">
+    <button (click)="newPost()" *ngIf="!isShowInputField" class="btn btn-primary col-sm-12">Post New Tweet</button>
+    <div *ngIf="isShowInputField">
+        <form (submit)="submit()" [formGroup]="tweetPostForm">
+            <textarea formControlName="message" type="text" class="form-control mt-2" rows="6" placeholder="Message (less than 144 char)"></textarea>
+            <input formControlName="tag" type="text" class="form-control mt-2 " placeholder="Tag (Optinal)"/>
+            <input type="submit" value="Post"  class="btn btn-success col-sm-12 mt-3"/>
+          </form>
+          <mat-progress-bar *ngIf="displayLoading" class="mt-3" mode="indeterminate"></mat-progress-bar>
+          <div *ngIf="displayError" class="alert alert-danger mt-3">Oops Can't Post</div>
+          <button (click)="newPostcancal()" class="btn btn-link mt-1">back</button>
+    </div>
+    <div *ngIf="isShowPostSuccess">
+        <button (click)="newPostcancal()" class="alert alert-success col-sm-12 mt-3">posted created</button>
+        <button (click)="newPostcancal()" class="btn btn-link">back</button>
+    </div>
+</div>

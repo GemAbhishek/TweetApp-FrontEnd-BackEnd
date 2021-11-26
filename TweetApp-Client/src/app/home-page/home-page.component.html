@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 mt-3">
+      <div class="img-thumbnail" style="background-color: skyblue">
+        <img
+          class="rounded-circle img-thumbnail custmSize"
+          alt="profilePic"
+          style="box-sizing: border-box"
+          src=".\assets\profile01.png"
+          data-holder-rendered="true"
+        />
+        <br />
+        <mat-divider class="mt-3"></mat-divider>
+        <br />
+        <div class="img-thumbnail" style="text-align: center">
+          {{ username }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 mt-3">
+      <div
+        class="img-thumbnail"
+        style="background-color: whitesmoke; height: 660px; overflow-y: auto" >
+        <div *ngIf="isViewAllTweet">
+          <app-view-all-tweet></app-view-all-tweet>
+        </div>
+        <div *ngIf="isViewMyTweet">
+          <app-view-tweet></app-view-tweet>
+        </div>
+        <div *ngIf="isViewAllUser">
+          <app-all-user></app-all-user>
+        </div>
+        <div *ngIf="isSearchUser" class="img-thumbnail">
+          <app-search-user></app-search-user>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 mt-3">
+      <div class="img-thumbnail" style="background-color:skyblue">
+        <div class="row">
+          <div class="col-sm-9">
+              <button (click)="onIsviewALLTweet()" class="btn btn-light col-sm-12 mt-2">View All Tweet </button>
+              <button (click)="onIsviewMyTweet()" class="btn btn-light col-sm-12 mt-2">View My Tweet </button>
+              <button (click)="onIsviewALLuser()" class="btn btn-light col-sm-12 mt-2">View All User </button>
+              <button (click)="onIsSearchUser()"  class="btn btn-light col-sm-12 mt-2">Search User   </button>
+          </div>
+          <div class="col-sm-3">
+            <button (click)="onIsviewALLTweet()" class="btn btn-light col-sm-12 mt-2"><i *ngIf="isViewAllTweet" class="bi bi-check-circle-fill"></i><i *ngIf="!isViewAllTweet" class="bi bi-check-circle"></i></button>
+            <button (click)="onIsviewMyTweet()" class="btn btn-light col-sm-12 mt-2"><i *ngIf="isViewMyTweet" class="bi bi-check-circle-fill"></i><i *ngIf="!isViewMyTweet" class="bi bi-check-circle"></i></button>
+            <button (click)="onIsviewALLuser()" class="btn btn-light col-sm-12 mt-2"><i *ngIf="isViewAllUser" class="bi bi-check-circle-fill"></i><i *ngIf="!isViewAllUser" class="bi bi-check-circle"></i></button>
+            <button (click)="onIsSearchUser()" class="btn btn-light col-sm-12 mt-2"><i *ngIf="isSearchUser" class="bi bi-check-circle-fill"></i><i *ngIf="!isSearchUser" class="bi bi-check-circle"></i></button>
+          </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
+      </div>
+      <div class="img-thumbnail mt-5">
+        <app-post-tweet></app-post-tweet>
+      </div>
+    </div>
+  </div>
+</div>

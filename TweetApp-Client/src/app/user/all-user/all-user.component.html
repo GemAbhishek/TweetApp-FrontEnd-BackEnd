@@ -1,0 +1,26 @@
+<div *ngIf="users.length == 0">
+  <mat-spinner style="margin-left: 40%"></mat-spinner>
+</div>
+
+<div *ngFor="let user of users"  class="card mb-3" style="max-width: 99%">
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img
+          src=".\assets\profile01.png"
+          class="img-fluid rounded-start custmSize"
+          alt="profile pic"
+        />
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h4 *ngIf="user.isActive" class="card-title" style="color: green; font-weight: bold;">Active</h4>
+          <h4 *ngIf="!user.isActive" class="card-title" style="color: darkred; font-weight: bold;"> Away : {{user.lastSeen | timeAgo}}</h4>
+          <p class="card-text">
+            Name : {{user.firstName}} {{user.lastName}}
+          </p>
+          <p class="card-text"><small class="text-muted">Gender : {{user.gender}}</small></p>
+          <p class="card-text"><small class="text-muted">Id : {{user.email}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
