@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row" align-items: center>
+    <div class="col-sm-6 mt-5">
+      <img src=".\assets\LogoTweetApp.png" class="img-fluid img-thumbnail" alt="tweetAppLogo" ><br>
+    </div>
+    <div class="col-sm-4 mt-5">
+      <div class="img-thumbnail" style="background-color:whitesmoke;">
+        <form (submit)="submit()" [formGroup]="loginForm">
+          <input formControlName="userId" type="text" class="form-control mt-2" placeholder="Email"/>
+          <input formControlName="password" type="password" class="form-control mt-2 " placeholder="password"/>
+          <input type="submit" value="Login"  class="btn btn-primary col-sm-12 mt-3"/>
+        </form>
+        <mat-progress-bar *ngIf="displayLoading" class="mt-3" mode="indeterminate"></mat-progress-bar>
+        <div *ngIf="displayError" class="alert alert-danger mt-3">wrong credentials</div>
+        
+        <a routerLink="/register"><button type="button" class="btn btn-primary col-sm-12 mt-3">Register</button></a>
+        <br>
+        <a routerLink="/forgetpassword"><button type="button" class="btn btn-link mt-3">Forgot Password (reset now)</button>
+        </a>
+      </div>
+    </div>
+</div>

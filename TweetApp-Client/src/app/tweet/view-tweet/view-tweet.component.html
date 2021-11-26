@@ -1,0 +1,88 @@
+<div *ngIf="tweets.length == 0">
+  <mat-spinner *ngIf="!fetchDone" style="margin-left: 40%"></mat-spinner>
+  <p *ngIf="fetchDone" style="text-align: center;">
+    No tweet Found !!
+  </p>
+</div>
+<div *ngFor="let tweet of tweets;  let i = index" class="card mb-3" style="max-width: 98%">
+  <div class="row g-0">
+    <div class="col-md-2">
+      <img
+        src=".\assets\profile01.png"
+        class="img-fluid rounded-start custmSize"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{tweet.createdByName}}</h5>
+        <p class="card-text">
+          {{tweet.message}}
+        </p>
+        <p class="card-text"><small class="text-muted">tag {{tweet.tag}}</small></p>
+      </div>
+      <div class="row g-0">
+        <div class="col-md-3">
+          <div *ngIf="!tweet.likedByLoggedUser">
+            <button (click)="tweetLike(tweet.id, true, i)" class="btn btn-light col-sm-10">
+              like <i class="bi bi-hand-thumbs-up"></i>
+            </button>
+          </div>
+          <div *ngIf="tweet.likedByLoggedUser">
+            <button (click)="tweetLike(tweet.id, false, i)" class="btn btn-info col-sm-10">
+              liked <i class="bi bi-hand-thumbs-up-fill"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <button type="button" (click)="openReply(i)" class="btn btn-light col-sm-10">
+            reply <i class="bi bi-reply-fill"></i>
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button (click)="openEdit(i)" class="btn btn-light col-sm-10">
+            Edit <i class="bi bi-justify"></i>
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button (click)="tweetDelete(tweet.id, i)" class="btn btn-light col-sm-10">
+            Delete <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="mt-2"></mat-divider>
+    <div *ngIf="tweet.uiRDisplay" class="md-5 mt-1" style="background-color:snow;">
+      <div *ngFor="let reply of replies" class="row" style="margin-left: 25px;">
+        {{ reply.emailId }} : {{ reply.replyMessage }}
+      </div>
+      <div class="row">
+        <div>
+          <input
+            type="text"
+            class="col-sm-8"
+            style="margin-left: 25px;"
+            placeholder="type reply here"
+            #replymsg
+          /><button (click)="replyMsg(replymsg.value, tweet.id)" class="col-sm-3 mt-1">reply<i class="bi bi-reply-fill"></i></button>
+          <mat-progress-bar *ngIf="displayLoading" class="mt-3" mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    <mat-divider class="mt-2"></mat-divider>
+    </div>
+    <div *ngIf="tweet.uiEDisplay" class="md-5 mt-1">
+      <div>
+        <form [formGroup]="tweetEditForm">
+            <textarea formControlName="message" type="text" class="form-control mt-2" rows="2" [(ngModel)]="msg"></textarea>
+            <input formControlName="tag" type="text" class="form-control mt-2 " [(ngModel)]="tag"/>
+            <button (click)="Update(tweet.id, i)" class="btn btn-success col-sm-12 mt-3">Update Tweet</button>
+          </form>
+          <mat-progress-bar *ngIf="displayLoading" class="mt-1" mode="indeterminate"></mat-progress-bar>
+          <div *ngIf="displayError" class="alert alert-danger mt-3">Oops Can't Edit</div>
+      </div>
+      <div *ngIf="isShowEditSuccess">
+          <button class="alert alert-success col-sm-12 mt-3">tweet updated</button>
+      </div>
+    </div>
+  </div>
+</div>
